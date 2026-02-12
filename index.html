@@ -36,6 +36,15 @@
       align-items:flex-start;
     }
 
+    /* --- saari screen par text select / copy band --- */
+    html, body, .phone, .screen {
+    -webkit-user-select: none; /* Chrome/Safari/Android */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* old Edge/IE */
+    user-select: none;         /* standard */
+    -webkit-touch-callout: none; /* iOS long-press menu off */
+    }
+
     .phone{
       width:100%;
       max-width:430px;
@@ -414,16 +423,7 @@
       border-top:1px dashed #cfcfcf;
       margin:10px 0 6px;
     }
-    .popup-notch{
-      position:absolute;
-      width:26px;height:26px;
-      border-radius:50%;
-      background:rgba(0, 0, 0, 0.55);
-      top:69%;
-      transform:translateY(-50%);
-    }
-    .popup-notch.left{left:-13px;}
-    .popup-notch.right{right:-13px;}
+    
 
     .popup-close{
       position:absolute;
@@ -672,9 +672,6 @@
           </div>
         </div>
       </div>
-
-      <div class="popup-notch left"></div>
-      <div class="popup-notch right"></div>
     </div>
   </div>
 
@@ -742,14 +739,24 @@
       screenEl.addEventListener(ev, cancelHold);
     });
 
+
+
     // close popup
     overlay.addEventListener('click', function(e){
       if(e.target === overlay || e.target.classList.contains('popup-close')){
         overlay.classList.remove('show');
       }
     });
+
+        // ---- system context menu / copy ko disable karo ----
+    document.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+    });
+    document.addEventListener('selectstart', function(e){
+      e.preventDefault();
+    });
+    
   });
 </script>
 </body>
-
 </html>
