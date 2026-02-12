@@ -1,5 +1,5 @@
 {
-  "name": "Booking Details",
+  "name": "RailOne",
   "short_name": "RailOne",
   "start_url": "./",
   "display": "standalone",
@@ -18,4 +18,5 @@
       "type": "image/png"
     }
   ]
+
 }
