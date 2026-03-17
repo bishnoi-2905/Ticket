@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#000000">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Booking Details</title>
+  <title>RailOne – Booking Details</title>
 
   <!-- Fonts -->
   <link
@@ -24,9 +24,18 @@
       --text-muted:#777;
       --page-bg:#f0efe9;
       --card-bg:#f8e6d3;
+      --railone-blue:#0066ff;
     }
 
     *{box-sizing:border-box;margin:0;padding:0;}
+
+    html, body, .phone, .screen {
+      -webkit-user-select:none;
+      -moz-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
+      -webkit-touch-callout:none;
+    }
 
     body{
       font-family:"Roboto","Noto Sans Devanagari",system-ui,-apple-system,
@@ -38,15 +47,6 @@
       align-items:flex-start;
     }
 
-    /* --- saari screen par text select / copy band --- */
-    html, body, .phone, .screen {
-    -webkit-user-select: none; /* Chrome/Safari/Android */
-    -moz-user-select: none;    /* Firefox */
-    -ms-user-select: none;     /* old Edge/IE */
-    user-select: none;         /* standard */
-    -webkit-touch-callout: none; /* iOS long-press menu off */
-    }
-
     .phone{
       width:100%;
       max-width:430px;
@@ -54,10 +54,228 @@
       min-height:100vh;
       box-shadow:0 0 18px rgba(0,0,0,.35);
       overflow:hidden;
-      position:relative; /* popup overlay ke liye */
+      position:relative;
     }
 
-    /* -------- TOP BLUE BAR -------- */
+    .view{display:none;}
+    .view.active{display:block;}
+
+    /* ========= BOTTOM NAV ========= */
+    .bottom-nav{
+      position:absolute;
+      left:0;right:0;bottom:0;
+      height:60px;
+      background:var(--railone-blue);
+      display:flex;
+      justify-content:space-around;
+      align-items:flex-start;
+      padding-top:4px;
+      z-index:50;
+    }
+    .nav-item{
+      flex:1;
+      border:none;
+      background:transparent;
+      color:#d0e2ff;
+      font-size:11px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+    }
+    .nav-item.active{
+      color:#ffffff;
+      font-weight:500;
+    }
+    .nav-svg{
+      width:22px;
+      height:22px;
+      margin-bottom:2px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+    }
+
+    /* ========= HOME SCREEN ========= */
+
+    .home-header{
+      background:#ffffff;
+      padding:10px 14px 6px;
+      border-bottom:1px solid #e4e4e4;
+    }
+    .home-header-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .home-lang{
+      width:34px;height:34px;
+      border-radius:17px;
+      border:1px solid #e0e0e0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:16px;
+      color:#0066ff;
+      background:#f9f9ff;
+    }
+    .railone-logo{
+      height:26px;           /* yahi jagah use hogi logo ke liye */
+      object-fit:contain;
+    }
+    .home-bell{
+      width:34px;height:34px;
+      border-radius:17px;
+      border:1px solid #e0e0e0;
+      display:flex;align-items:center;justify-content:center;
+      font-size:18px;
+      background:#ffffff;
+    }
+
+    .home-screen{
+      background:#ffffff;
+      padding:10px 14px 70px; /* bottom nav ke liye */
+    }
+    .home-hello{
+      font-size:14px;
+      margin-bottom:10px;
+      color:#102a71;
+      font-weight:600;
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      margin:6px 0 10px;
+      color:#102a71;
+    }
+
+    /* Journey Planner cards */
+
+    .jp-row{
+      display:flex;
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .jp-card{
+      /* flex:1; */
+      text-align:center;
+    }
+    .jp-img-box{
+      width:110px;
+      height:90px;        /* approx original screenshot */
+      border-radius:20px;
+      overflow:hidden;
+    }
+    .jp-img-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .jp-label{
+      margin-top:6px;
+      font-size:13px;
+      color:#4b4b4b;
+    }
+
+    /* More Offerings icons */
+
+    .offer-title{
+      font-size:17px;
+      font-weight:700;
+      margin:6px 0 10px;
+      color:#102a71;
+    }
+    .offer-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px 10px;
+      margin-bottom:18px;
+    }
+    .offer-item{
+      text-align:center;
+      font-size:11px;
+      color:#1c2b5a;
+    }
+    .offer-icon-box{
+      width:64px;
+      height:64px;
+      margin:0 auto 6px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .offer-icon-box img{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .home-subtitle{
+      font-size:16px;
+      font-weight:700;
+      margin:8px 0 8px;
+      color:#102a71;
+    }
+
+    /* Do you know images */
+    .dyk-row {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+
+    /* Hide scrollbar */
+    scroll-behavior: smooth;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE & Edge */
+}
+
+    .dyk-row::-webkit-scrollbar {
+        display: none;                /* Chrome, Safari */
+    }
+
+    .dyk-card{
+      min-width:40%;
+      /* koi white box / shadow nahi */
+    }
+    .dyk-img-box{
+      width:100%;
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .dyk-img-box img{
+      width:100%;
+      height:130px;
+      object-fit:cover;
+      display:block;
+    }
+    .dyk-text{
+      padding:6px 2px 4px;
+      font-size:11px;
+      color:#203261;
+    }
+
+    .social-subtitle{
+      font-size:16px;
+      font-weight:700;
+      margin:10px 0 8px;
+      color:#102a71;
+    }
+    .social-img-box{
+      width:100%;
+      border-radius:18px;
+      overflow:hidden;
+    }
+    .social-img-box img{
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* ========= BOOKING SCREEN (ORIGINAL) ========= */
+
     .app-bar{
       background:var(--app-blue);
       color:#fff;
@@ -93,9 +311,9 @@
 
     .screen{
       background:#e9e8e7;
+      padding-bottom:60px;
     }
 
-    /* -------- THANK YOU STRIP -------- */
     .greeting-strip{
       background:#ffffff;
       border-bottom:1px solid #dedede;
@@ -106,7 +324,6 @@
       color:var(--text-muted);
     }
 
-    /* -------- WHITE TICKET CARD (pura ticket) -------- */
     .ticket{position:relative;margin:6px 9px 16px;}
     .ticket-inner{
       position:relative;
@@ -130,8 +347,6 @@
       z-index:1;
       color:var(--text-main);
     }
-
-    /* ========= BLACK DYNAMIC BOX ========= */
 
     .dynamic-wrap{
       background:var(--accent-green-soft);
@@ -246,8 +461,6 @@
       transition:width .8s linear;
     }
 
-    /* ====== TICKET DETAILS ====== */
-
     .ticket-header{
       display:flex;
       justify-content:space-between;
@@ -291,7 +504,6 @@
 
     .two-col-block{
       display:flex;
-      /* line-height:2; */
       justify-content:space-between;
       margin:4px 0;
     }
@@ -301,7 +513,7 @@
     .fare-single{
       margin-top:6px;
       font-size:12px;
-      line-height: 2;
+      line-height:2;
       font-weight:500;
     }
 
@@ -325,10 +537,9 @@
       font-size:11px;
       color:#c62828;
       line-height:1.4;
-      margin: 8px 1px 10px 1px;
+      margin:8px 1px 10px 1px;
     }
 
-    /* Button */
     .primary-btn{
       display:block;
       width:100%;max-width:270px;
@@ -339,7 +550,6 @@
       font-size:14px;font-weight:500;
     }
 
-    /* ===== QR BOX full‑width edge-attached ===== */
     .qr-box{
       background:#fff;
       border-top:1px solid #dedede;
@@ -355,7 +565,6 @@
       object-fit:contain;
     }
 
-    /* ===== DO YOU KNOW full‑width white box ===== */
     .info-box{
       background:#ffffff;
       border-top:1px solid #dedede;
@@ -367,17 +576,15 @@
       color:var(--text-main);
       line-height:1.45;
     }
-    .info-section strong{font-weight:500;}
 
-    /* ==================== POPUP OVERLAY ==================== */
     .popup-overlay{
       position:absolute;
       inset:0;
       display:none;
       align-items:flex-start;
-      padding-top: 200px;
+      padding-top:200px;
       justify-content:center;
-      background:rgba(0,0,0,0.55);          /* dark, not white */
+      background:rgba(0,0,0,0.55);
       backdrop-filter:blur(6px);
       -webkit-backdrop-filter:blur(6px);
       z-index:100;
@@ -412,7 +619,7 @@
       justify-content:space-between;
       align-items:center;
       margin:4px 0 8px;
-      line-height: 3;
+      line-height:3;
       font-size:13px;
       font-weight:500;
     }
@@ -425,8 +632,6 @@
       border-top:1px dashed #cfcfcf;
       margin:10px 0 6px;
     }
-    
-
     .popup-close{
       position:absolute;
       top:6px;right:10px;
@@ -434,90 +639,336 @@
       color:#777;
       cursor:pointer;
     }
-
-    @media(max-width:480px){
-      .ticket{margin:6px 6px 16px;}
-    }
   </style>
 </head>
 <body>
 <div class="phone">
 
-  <!-- TOP BAR -->
-  <div class="app-bar">
-    <div class="app-bar-top">
-      <div class="app-bar-left">
-        <div class="circle-btn">&#8592;</div>
-        <div>
-          <div class="app-title">Booking Details</div>
-          <div class="app-sub">Mobile: 9350821597</div>
+  <!-- ========= HOME VIEW ========= -->
+  <div id="homeView" class="view active">
+    <div class="home-header">
+      <div class="home-header-top">
+        <div class="home-lang">A</div>
+
+        <!-- EXACT LOGO SPACE: apna PNG yahan rakho -->
+        <img src="images/Railone.jpeg" alt="RailOne" class="railone-logo">
+
+        <div class="home-bell">🕭</div>
+      </div>
+    </div>
+
+    <div class="home-screen">
+      <div class="home-hello">Hi, Kuldeep Bishnoi!</div>
+
+      <div class="section-title">Journey Planner</div>
+      <div class="jp-row">
+        <div class="jp-card">
+          <div class="jp-img-box">
+            <img src="images/Reserved.jpeg" alt="Reserved">
+          </div>
+          <div class="jp-label">Reserved</div>
+        </div>
+        <div class="jp-card">
+          <div class="jp-img-box">
+            <img src="images/Unreserved.jpeg" alt="Unreserved">
+          </div>
+          <div class="jp-label">Unreserved</div>
+        </div>
+        <div class="jp-card">
+          <div class="jp-img-box">
+            <img src="images/Platform.jpeg" alt="Platform">
+          </div>
+          <div class="jp-label">Platform</div>
         </div>
       </div>
-      <div class="app-bar-right">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-          <circle cx="18" cy="5" r="3"/>
-          <circle cx="6" cy="12" r="3"/>
-          <circle cx="18" cy="19" r="3"/>
-          <line x1="8.6" y1="13.5" x2="15.4" y2="17.5" stroke="white" stroke-width="2"/>
-          <line x1="15.4" y1="6.5" x2="8.6" y2="10.5" stroke="white" stroke-width="2"/>
-        </svg>
+
+      <div class="offer-title">More Offerings</div>
+      <div class="offer-grid">
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#ffe9ef;">
+            <img src="images/Search.png" alt="">
+          </div>
+          Search<br>Trains
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#e9ffe1;">
+            <img src="images/PNR.png" alt="">
+          </div>
+          PNR<br>Status
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#e3f1ff;">
+            <img src="images/Coach.png" alt="">
+          </div>
+          Coach<br>Position
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#fff4de;">
+            <img src="images/Track.png" alt="">
+          </div>
+          Track Your<br>Train
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#ebe6ff;">
+            <img src="images/Order.png" alt="">
+          </div>
+          Order<br>Food
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#f2f2f2;">
+            <img src="images/Files.png" alt="">
+          </div>
+          File<br>Refund
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#ffe3e3;">
+            <img src="images/Rail.png" alt="">
+          </div>
+          Rail<br>Madad
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon-box" style="background:#9e86b8;">
+            <img src="images/GoTo.png" alt="">
+          </div>
+          Go To<br>WAVES
+        </div>
+      </div>
+
+      <div class="home-subtitle">Do You know?</div>
+      <div class="dyk-row">
+        <div class="dyk-card">
+          <div class="dyk-img-box">
+            <img src="images/train.jpeg" alt="">
+          </div>
+          <div class="dyk-text">
+            First ever passenger train was run between Bori Bandar to Thane
+            on April 16, 1853.
+          </div>
+        </div>
+        <div class="dyk-card">
+          <div class="dyk-img-box">
+            <img src="images/Chenab.jpeg" alt="">
+          </div>
+          <div class="dyk-text">
+            Chenab Railway Bridge in Dharot, Jammu &amp; Kashmir is the
+            world's highest Railway Bridge.
+          </div>
+        </div>
+        <div class="dyk-card">
+          <div class="dyk-img-box">
+            <img src="images/Noney.jpeg" alt="">
+          </div>
+          <div class="dyk-text">
+            Noney Bridge is going to be world's tallest railway bridge pier at a height of 141 meters.
+          </div>
+        </div>
+        <div class="dyk-card">
+          <div class="dyk-img-box">
+            <img src="images/Shree.jpeg" alt="">
+          </div>
+          <div class="dyk-text">
+            Shree Siddharoodha Swamiji Railway Station Hubballi is world's longest Railway Platform with length of 1505 meters.
+          </div>
+        </div>
+        <div class="dyk-card">
+          <div class="dyk-img-box">
+            <img src="images/99.jpeg" alt="">
+          </div>
+          <div class="dyk-text">
+            99% Electrification is achieved in Indian Railways.
+          </div>
+        </div>
+      </div>
+
+      <div class="social-subtitle">
+        Follow Us On Social Media Platforms
+      </div>
+      <div class="social-img-box">
+        <img src="images/social.jpeg" alt="">
       </div>
     </div>
   </div>
 
-  <div class="screen">
+  <!-- ========= BOOKING VIEW (unchanged) ========= -->
+  <div id="bookingView" class="view">
 
-    <!-- THANK YOU STRIP -->
-    <div class="greeting-strip">
-      <div class="greeting">
-        Thank You KULDEEP BISHNOI, Happy Journey !
+    <!-- TOP BAR -->
+    <div class="app-bar">
+      <div class="app-bar-top">
+        <div class="app-bar-left">
+          <div class="circle-btn" id="backToHome">&#8592;</div>
+          <div>
+            <div class="app-title">Booking Details</div>
+            <div class="app-sub">Mobile: 9350821597</div>
+          </div>
+        </div>
+        <div class="app-bar-right">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.6" y1="13.5" x2="15.4" y2="17.5" stroke="white" stroke-width="2"/>
+            <line x1="15.4" y1="6.5" x2="8.6" y2="10.5" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
       </div>
     </div>
 
-    <!-- WHITE TICKET (card + shadow) -->
-    <div class="ticket">
-      <div class="ticket-inner">
-        <div class="ticket-main">
+    <div class="screen">
 
-          <!-- BLACK DYNAMIC BOX (attached to white edges) -->
-          <div class="dynamic-wrap">
-            <div class="dynamic-card">
-              <div class="dynamic-side left">
-                <span class="side-text side-text-en">INDIAN RAILWAYS</span>
-              </div>
+      <!-- THANK YOU STRIP -->
+      <div class="greeting-strip">
+        <div class="greeting">
+          Thank You KULDEEP BISHNOI, Happy Journey !
+        </div>
+      </div>
 
-              <div class="dynamic-center">
-                <div class="dynamic-title">Dynamic preview will close in</div>
-                <div id="countdown" class="countdown">05:00</div>
+      <!-- WHITE TICKET (card + shadow) -->
+      <div class="ticket">
+        <div class="ticket-inner">
+          <div class="ticket-main">
 
-                <div class="dynamic-label-small">
-                  Ticket Booking Date &amp; Time
+            <!-- BLACK DYNAMIC BOX (attached to white edges) -->
+            <div class="dynamic-wrap">
+              <div class="dynamic-card">
+                <div class="dynamic-side left">
+                  <span class="side-text side-text-en">INDIAN RAILWAYS</span>
                 </div>
-                <div class="dynamic-booking-dt">27 Jan 2026, 07:55</div>
-                <div class="dynamic-pnr">R28428</div>
-                <div class="dynamic-note">Ticket is Non-Transferable</div>
+
+                <div class="dynamic-center">
+                  <div class="dynamic-title">Dynamic preview will close in</div>
+                  <div id="countdown" class="countdown">05:00</div>
+
+                  <div class="dynamic-label-small">
+                    Ticket Booking Date &amp; Time
+                  </div>
+                  <div class="dynamic-booking-dt">27 Jan 2026, 07:55</div>
+                  <div class="dynamic-pnr">R28428</div>
+                  <div class="dynamic-note">Ticket is Non-Transferable</div>
+                </div>
+
+                <div class="dynamic-side right">
+                  <span class="side-text side-text-hi">भारतीय रेल</span>
+                </div>
               </div>
 
-              <div class="dynamic-side right">
-                <span class="side-text side-text-hi">भारतीय रेल</span>
+              <div class="dynamic-progress">
+                <div id="progress-bar" class="dynamic-progress-bar"></div>
               </div>
             </div>
 
-            <div class="dynamic-progress">
-              <div id="progress-bar" class="dynamic-progress-bar"></div>
+            <!-- DETAILS -->
+            <div class="ticket-header">
+              <span>Season Ticket</span>
+              <span class="ticket-code">XS96E9Y04F</span>
             </div>
+            <br>
+
+            <div class="station-row">
+              <span>RAIPUR JN.</span>
+              <span class="km">&mdash; 37 km &mdash;</span>
+              <span>DURG</span>
+            </div>
+
+            <div class="two-col-block">
+              <div>
+                <div class="info-label">Via</div>
+                <div class="value-text">BIA</div>
+              </div>
+              <div class="right">
+                <div class="info-label">Booked on</div>
+                <div class="value-text">27/01/2026 07:55</div>
+              </div>
+            </div>
+
+            <div class="two-col-block">
+              <div>
+                <div class="info-label">Valid From</div>
+                <div class="value-text">27/01/2026</div>
+              </div>
+              <div class="right">
+                <div class="info-label">*Valid Till</div>
+                <div class="value-text">26/04/2026</div>
+              </div>
+            </div>
+
+            <div class="fare-single">
+              QUARTERLY | SECOND | &#8377; 500.00
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="two-col-block" style="margin-top:8px;">
+              <div>
+                <div class="info-label">Name</div>
+                <div class="value-text-large">KULDEEP BISHNOI</div>
+              </div>
+              <div class="right">
+                <div class="info-label">Age</div>
+                <div class="value-text">20 years</div>
+              </div>
+            </div>
+
+            <div class="two-col-block">
+              <div>
+                <div class="info-label">ID Type</div>
+                <div class="value-text">Govt. issued Icard</div>
+              </div>
+              <div class="right">
+                <div class="info-label">ID Number</div>
+                <div class="value-text">650228034426</div>
+              </div>
+            </div>
+
+            <div class="green-bar"></div>
+
           </div>
+        </div>
 
-          <!-- DETAILS -->
-          <div class="ticket-header">
+        <div class="note-box">
+          Note: This ticket is non refundable. Ticket is stored locally on the
+          device. Please do not change your handset or perform factory reset.
+        </div>
+
+        <div class="ticket-notch left"></div>
+        <div class="ticket-notch right"></div>
+      </div>
+
+      <!-- Button -->
+      <button class="primary-btn">Upgrade to Superfast</button>
+
+      <!-- QR BOX -->
+      <div class="qr-box">
+        <img src="images/qr.png" alt="QR Code" class="qr-image">
+      </div>
+      <br>
+
+      <!-- DO YOU KNOW -->
+      <div class="info-box">
+        <div class="info-section">
+          <strong>Do you know?</strong><br><br>
+          IR recovers only 57% of cost of travel on an average.<br><br>
+          This ticket is booked on a personal user ID. Its sale/purchase is an
+          offence u/s 143 of the Railways Act, 1989.<br><br>
+          For enquiry and integrated railway helpline, please dial 139.
+        </div>
+      </div>
+
+    </div><!-- .screen -->
+
+    <!-- POPUP OVERLAY (LONG PRESS) -->
+    <div id="ticketOverlay" class="popup-overlay">
+      <div class="popup-ticket">
+        <div class="popup-inner">
+          <div class="popup-header-row">
             <span>Season Ticket</span>
-            <span class="ticket-code">XS96E9Y04F</span>
+            <span>R28428</span>
+            <span>XS96E9Y04F</span>
           </div>
-          <br>
 
-          <div class="station-row">
+          <div class="popup-mid-row">
             <span>RAIPUR JN.</span>
-            <span class="km">&mdash; 37 km &mdash;</span>
+            <span class="popup-km">&mdash; 37 km &mdash;</span>
             <span>DURG</span>
           </div>
 
@@ -530,7 +981,8 @@
               <div class="info-label">Booked on</div>
               <div class="value-text">27/01/2026 07:55</div>
             </div>
-        </div>
+          </div>
+          <br>
 
           <div class="two-col-block">
             <div>
@@ -547,9 +999,9 @@
             QUARTERLY | SECOND | &#8377; 500.00
           </div>
 
-          <div class="divider"></div>
+          <div class="popup-divider-dotted"></div>
 
-          <div class="two-col-block" style="margin-top:8px;">
+          <div class="two-col-block">
             <div>
               <div class="info-label">Name</div>
               <div class="value-text-large">KULDEEP BISHNOI</div>
@@ -570,119 +1022,77 @@
               <div class="value-text">650228034426</div>
             </div>
           </div>
-
-          <div class="green-bar"></div>
-
-        </div>
-      </div>
-
-      <div class="note-box">
-        Note: This ticket is non refundable. Ticket is stored locally on the
-        device. Please do not change your handset or perform factory reset.
-      </div>
-
-      <div class="ticket-notch left"></div>
-      <div class="ticket-notch right"></div>
-    </div>
-
-    <!-- Button -->
-    <button class="primary-btn">Upgrade to Superfast</button>
-
-    <!-- QR BOX -->
-    <div class="qr-box">
-      <img src="images/qr.png" alt="QR Code" class="qr-image">
-    </div>
-    <br>
-
-    <!-- DO YOU KNOW -->
-    <div class="info-box">
-      <div class="info-section">
-        <strong>Do you know?</strong><br><br>
-        IR recovers only 57% of cost of travel on an average.<br><br>
-        This ticket is booked on a personal user ID. Its sale/purchase is an
-        offence u/s 143 of the Railways Act, 1989.<br><br>
-        For enquiry and integrated railway helpline, please dial 139.
-      </div>
-    </div>
-
-  </div><!-- .screen -->
-
-  <!-- ===== POPUP OVERLAY (LONG PRESS) ===== -->
-  <div id="ticketOverlay" class="popup-overlay">
-    <div class="popup-ticket">
-      <div class="popup-inner">
-        <div class="popup-header-row">
-          <span>Season Ticket</span>
-          <span>R28428</span>
-          <span>XS96E9Y04F</span>
-        </div>
-        
-        <div class="popup-mid-row">
-            <span>RAIPUR JN.</span>
-            <span class="popup-km">&mdash; 37 km &mdash;</span>
-            <span>DURG</span>
-        </div>
-
-        <div class="two-col-block">
-          <div>
-            <div class="info-label">Via</div>
-            <div class="value-text">BIA</div>
-          </div>
-          <div class="right">
-            <div class="info-label">Booked on</div>
-            <div class="value-text">27/01/2026 07:55</div>
-          </div>
-        </div>
-        <br>
-
-        <div class="two-col-block">
-          <div>
-            <div class="info-label">Valid From</div>
-            <div class="value-text">27/01/2026</div>
-          </div>
-          <div class="right">
-            <div class="info-label">*Valid Till</div>
-            <div class="value-text">26/04/2026</div>
-          </div>
-        </div>
-
-        <div class="fare-single">
-          QUARTERLY | SECOND | &#8377; 500.00
-        </div>
-
-        <div class="popup-divider-dotted"></div>
-
-        <div class="two-col-block">
-          <div>
-            <div class="info-label">Name</div>
-            <div class="value-text-large">KULDEEP BISHNOI</div>
-          </div>
-          <div class="right">
-            <div class="info-label">Age</div>
-            <div class="value-text">20 years</div>
-          </div>
-        </div>
-
-        <div class="two-col-block">
-          <div>
-            <div class="info-label">ID Type</div>
-            <div class="value-text">Govt. issued Icard</div>
-          </div>
-          <div class="right">
-            <div class="info-label">ID Number</div>
-            <div class="value-text">650228034426</div>
-          </div>
         </div>
       </div>
     </div>
+
+  </div><!-- bookingView -->
+
+  <!-- ========= BOTTOM NAV ========= -->
+  <div class="bottom-nav">
+    <button class="nav-item active" data-view="home">
+      <svg class="nav-svg" viewBox="0 0 24 24">
+        <path d="M4 11L12 4l8 7v8h-5v-5H9v5H4z"/>
+      </svg>
+      Home
+    </button>
+    <button class="nav-item" data-view="booking">
+      <svg class="nav-svg" viewBox="0 0 24 24">
+        <rect x="4" y="6" width="16" height="12" rx="2"/>
+        <path d="M8 6v2M16 6v2M8 18v-2M16 18v-2"/>
+      </svg>
+      My Bookings
+    </button>
+    <button class="nav-item" data-view="home">
+      <svg class="nav-svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="9" r="3.2"/>
+        <path d="M6 19c.8-3 2.7-4.5 6-4.5s5.2 1.5 6 4.5"/>
+      </svg>
+      You
+    </button>
+    <button class="nav-item" data-view="home">
+      <svg class="nav-svg" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+      Menu
+    </button>
   </div>
 
 </div><!-- .phone -->
 
-<!-- TIMER + POPUP SCRIPT -->
 <script>
   window.addEventListener('DOMContentLoaded', function () {
-    /* ---- TIMER ---- */
+
+    /* ---- NAVIGATION ---- */
+    var homeView = document.getElementById('homeView');
+    var bookingView = document.getElementById('bookingView');
+    var navItems = document.querySelectorAll('.nav-item');
+
+    function showView(name){
+      if(name === 'booking'){
+        bookingView.classList.add('active');
+        homeView.classList.remove('active');
+      }else{
+        homeView.classList.add('active');
+        bookingView.classList.remove('active');
+      }
+    }
+
+    navItems.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        navItems.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var v = btn.getAttribute('data-view');
+        showView(v);
+      });
+    });
+
+    // back arrow in booking
+    document.getElementById('backToHome').addEventListener('click', function(){
+      document.querySelector('.nav-item[data-view="home"]').click();
+    });
+
+    /* ---- TIMER (same as original) ---- */
     var totalTime = 5 * 60;  // 5 minutes
     var remaining = totalTime;
     var counter = document.getElementById('countdown');
@@ -691,7 +1101,6 @@
     function updateTimer() {
       var mins = Math.floor(remaining / 60);
       var secs = remaining % 60;
-
       var mm = (mins < 10 ? '0' : '') + mins;
       var ss = (secs < 10 ? '0' : '') + secs;
       counter.textContent = mm + ':' + ss;
@@ -711,21 +1120,20 @@
     updateTimer();
     var timerId = setInterval(updateTimer, 1000);
 
-    /* ---- LONG PRESS POPUP ---- */
+    /* ---- LONG PRESS POPUP (booking only) ---- */
     var overlay = document.getElementById('ticketOverlay');
-    var screenEl = document.querySelector('.screen');
+    var screenEl = bookingView.querySelector('.screen');
     var holdTimer;
-    var holdDelay = 600; // ms
+    var holdDelay = 600;
 
     function showOverlay(){
       overlay.classList.add('show');
     }
-
     function startHold(e){
+      if(!bookingView.classList.contains('active')) return;
       if(overlay.classList.contains('show')) return;
       holdTimer = setTimeout(showOverlay, holdDelay);
     }
-
     function cancelHold(){
       if(holdTimer){
         clearTimeout(holdTimer);
@@ -733,37 +1141,28 @@
       }
     }
 
-    // long-press listeners
     screenEl.addEventListener('mousedown', startHold);
     screenEl.addEventListener('touchstart', startHold);
-
     ['mouseup','mouseleave','touchend','touchcancel'].forEach(function(ev){
       screenEl.addEventListener(ev, cancelHold);
     });
 
-
-
-    // close popup
     overlay.addEventListener('click', function(e){
       if(e.target === overlay || e.target.classList.contains('popup-close')){
         overlay.classList.remove('show');
       }
     });
 
-        // ---- system context menu / copy ko disable karo ----
-    document.addEventListener('contextmenu', function(e){
-      e.preventDefault();
-    });
-    document.addEventListener('selectstart', function(e){
-      e.preventDefault();
-    });
-    
+    // copy / context menu block
+    document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+    document.addEventListener('selectstart', function(e){ e.preventDefault(); });
   });
 </script>
-  <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
 </script>
 </body>
 </html>
